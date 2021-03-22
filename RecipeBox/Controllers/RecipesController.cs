@@ -80,9 +80,13 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddTag(int id)
+    public async Task<ActionResult> AddTag(int id)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+      // Think the ViewBag is the way to go here - it just lists all tags
       ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
       return View(thisRecipe);
     }
