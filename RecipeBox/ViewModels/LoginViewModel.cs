@@ -1,4 +1,4 @@
-namespace ProjectName.ViewModels
+namespace RecipeBox.ViewModels
 {
   public class LoginViewModel
   {

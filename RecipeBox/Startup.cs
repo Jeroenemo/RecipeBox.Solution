@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using ProjectName.Models;
+using RecipeBox.Models;
 
-namespace ProjectName
+namespace RecipeBox
 {
   public class Startup
   {
@@ -25,7 +25,7 @@ namespace ProjectName
     {
       services.AddMvc();
       services.AddEntityFrameworkMySql()
-        .AddDbContext<ProjectNameContext>(options => options
+        .AddDbContext<RecipeBoxContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
       // services.Configure<IdentityOptions>(options => 
@@ -42,13 +42,14 @@ namespace ProjectName
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
+      app.UseAuthentication();
       app.UseRouting();
-      app.UseStaticFiles();
+      app.UseAuthorization();   
       app.UseEndpoints(routes =>
       {
         routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
       });
-
+      app.UseStaticFiles();
       app.Run(async (context) =>
       {
         await context.Response.WriteAsync("Hello World!");

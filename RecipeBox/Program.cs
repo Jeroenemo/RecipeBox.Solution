@@ -1,9 +1,9 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ProjectName
+namespace RecipeBox
 {
-  public class Project
+  public class Program
   {
     public static void Main(string[] args)
     {

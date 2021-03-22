@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using ProjectName.Models;
+using RecipeBox.Models;
 
-namespace ProjectName.Controllers
+namespace RecipeBox.Controllers
 {
   public class HomeController : Controller
   {
