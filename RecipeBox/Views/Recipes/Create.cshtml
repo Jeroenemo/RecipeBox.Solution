@@ -9,7 +9,7 @@
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
-  
+
   @Html.LabelFor(model => model.Description)
   @Html.TextBoxFor(model => model.Description)
 
@@ -24,4 +24,7 @@
     new SelectList(Enum.GetValues(typeof(Rating))),
     "Select a Rating")
 
+  <input type="submit" value="Add recipe to the RecipeBox" class="btn btn-default">
 }
+
+<p>@Html.ActionLink("Back to all recipes", "Index")</p>

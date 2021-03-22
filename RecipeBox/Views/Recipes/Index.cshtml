@@ -1,19 +1,23 @@
-@* @using ToDoList.Models;
+@{
+  Layout = "_Layout";
+}
 
-<h1>To Do List</h1>
+@using RecipeBox.Models;
+
+<h1>Recipes</h1>
 
 @if (Model.Count == 0)
 {
-  <p>There are no items in the list.</p>
+  <p>There are no recipes at the moment.</p>
 }
 <ul>
-  @foreach (Item item in Model)
+  @foreach (Recipe recipe in Model)
   {
-    <li><a href='/items/@item.Id'>@item.Description</a></li>
+    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId })</li>
   }
 </ul>
-<a href="/items/new">Add a new item.</a>
+<a href="/recipes/create">Add a new recipe.</a>
 
-<form action="/items/delete" method="post">
-  <button type="submit" name="button">Clear All Items</button>
-</form> *@
+<form action="/recipes/delete" method="post">
+  <button type="submit" name="button" class="btn btn-default">Clear All Recipes</button>
+</form>

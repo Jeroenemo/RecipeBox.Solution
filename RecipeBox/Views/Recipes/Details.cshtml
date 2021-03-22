@@ -1,7 +1,36 @@
-@* <h1>To Do List Item Details: </h1>
+@{
+  Layout = "_Layout";
+}
 
-<h2>@Model["item"].Description</h2>
-<h3>Category: @Model["category"].Name</h3>
+@model RecipeBox.Models.Recipe
 
-<a href='/categories/@Model["category"].Id/items/new'>Add another item</a>
-<a href="/items">View all items</a> *@
+<h2>Recipe Details</h2>
+
+<hr>
+
+<h3>Recipe Description: @Html.DisplayFor(model => model.Description)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This recipe is not associated with any tags yet</p>
+}
+else
+{
+  <h4>Tags associated with this recipe</h4>
+  <ul>
+    @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Tag.Name</li>
+      @using (Html.BeginForm("DeleteCategory", "Items"))
+      {
+        @Html.Hidden("joinId", @join.TagRecipeId)
+        <input type="submit" value="Delete" class="btn btn-default">
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add a tag", "AddTag", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Back to all recipes", "Index")</p>
+<p>@Html.ActionLink("Edit recipe", "Edit", new { id = Model.RecipeId })</p>
+<p>@Html.ActionLink("Delete recipe", "Delete", new { id = Model.RecipeId })</p>
