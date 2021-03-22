@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Tag;
+
+<h2>Edit</h2>
+
+<hr>
+
+<h3>Edit @Html.DisplayFor(model => model.Name)</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TagId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name, new { required = "required" })
+
+  <input type="submit" value="Save" class="btn btn-default" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
