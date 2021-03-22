@@ -4,11 +4,9 @@
 
 @model RecipeBox.Models.Tag;
 
-<h2>Edit</h2>
+<h2>Edit @Html.DisplayFor(model => model.Name)</h2>
 
 <hr>
-
-<h3>Edit @Html.DisplayFor(model => model.Name)</h3>
 
 @using (Html.BeginForm())
 {

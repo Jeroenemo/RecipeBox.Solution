@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBox.Models;
+@model RecipeBox.Models.Recipe;
+
+<h2>Edit @Html.DisplayFor(model => model.Name)</h2>
+
+<hr>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RecipeId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description)
+
+  @Html.LabelFor(model => model.Ingredients)
+  @Html.TextBoxFor(model => model.Ingredients)
+
+  @Html.LabelFor(model => model.Instructions)
+  @Html.TextBoxFor(model => model.Instructions)
+
+  @Html.LabelFor(model => model.Rating)
+  @Html.DropDownListFor(model => model.Rating,
+    new SelectList(Enum.GetValues(typeof(Rating))),
+    "Select a Rating")
+
+  <input type="submit" value="Save" class="btn btn-default">
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
