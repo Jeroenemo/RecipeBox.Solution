@@ -127,7 +127,7 @@ namespace RecipeBox.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteCategory(int joinId)
+    public ActionResult DeleteTag(int joinId)
     {
       var joinEntry = _db.TagRecipe.FirstOrDefault(entry => entry.TagRecipeId == joinId);
       _db.TagRecipe.Remove(joinEntry);
