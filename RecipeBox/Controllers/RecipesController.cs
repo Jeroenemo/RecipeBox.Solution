@@ -130,9 +130,10 @@ namespace RecipeBox.Controllers
     public ActionResult DeleteTag(int joinId)
     {
       var joinEntry = _db.TagRecipe.FirstOrDefault(entry => entry.TagRecipeId == joinId);
+      int recipeId = joinEntry.RecipeId;
       _db.TagRecipe.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", "Recipes", new { id = recipeId });
     }
   }
 }
