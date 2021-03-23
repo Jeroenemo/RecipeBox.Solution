@@ -80,14 +80,23 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
+    // public async Task<ActionResult> AddTag(int id)
+    // {
+    //   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   var currentUser = await _userManager.FindByIdAsync(userId);
+
+    //   var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
+    //   // Think the ViewBag is the way to go here - it just lists all tags
+    //   ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+    //   return View(thisRecipe);
+    // }
     public async Task<ActionResult> AddTag(int id)
     {
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
-
       var thisRecipe = _db.Recipes.FirstOrDefault(recipe => recipe.RecipeId == id);
-      // Think the ViewBag is the way to go here - it just lists all tags
-      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+      var userTags = _db.Tags.Where(entry => entry.User.Id == currentUser.Id).ToList(); // new line
+      ViewBag.TagId = new SelectList(userTags, "TagId", "Name"); // targeting userTags instead of _db.Tags
       return View(thisRecipe);
     }
 
