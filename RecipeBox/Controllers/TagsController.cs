@@ -86,5 +86,36 @@ namespace RecipeBox.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public async Task<ActionResult> AddRecipe(int id)
+    {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      var thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
+      var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      ViewBag.RecipeId = new SelectList(userRecipes, "RecipeId", "Name");
+      return View(thisTag);
+    }
+
+    [HttpPost]
+    public ActionResult AddRecipe(Tag tag, int RecipeId)
+    {
+      if (RecipeId != 0)
+      {
+        _db.TagRecipe.Add(new TagRecipe() { RecipeId = RecipeId, TagId = tag.TagId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", "Tags", new { id = tag.TagId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteRecipe(int joinId)
+    {
+      var joinEntry = _db.TagRecipe.FirstOrDefault(entry => entry.TagRecipeId == joinId);
+      int tagId = joinEntry.TagId;
+      _db.TagRecipe.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", "Tags", new { id = tagId });
+    }
   }
 }

@@ -13,7 +13,7 @@
 <ul>
   @foreach (Recipe recipe in Model)
   {
-    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId })</li>
+    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId }) | @Html.ActionLink($"{recipe.Rating}", "Details", new { id = recipe.RecipeId })</li>
   }
 </ul>
 <a href="/recipes/create">Add a new recipe.</a>
@@ -21,3 +21,5 @@
 <form action="/recipes/delete" method="post">
   <button type="submit" name="button" class="btn btn-default">Clear All Recipes</button>
 </form>
+
+<p>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</p>
