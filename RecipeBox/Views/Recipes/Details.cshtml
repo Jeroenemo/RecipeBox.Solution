@@ -4,11 +4,11 @@
 
 @model RecipeBox.Models.Recipe
 
-<div class="header">Recipe: @Html.DisplayFor(model => model.Name)</div>
+<div class="header">@Html.DisplayFor(model => model.Name)</div>
 
 <hr>
 
-<p>Recipe Description: @Html.DisplayFor(model => model.Description)</p>
+<td>Description: @Html.DisplayFor(model => model.Description)</p>
 
 <p>Ingredients: @Html.DisplayFor(model => model.Ingredients)</p>
 
@@ -42,8 +42,9 @@ else
     }
   </ul>
 }
-
-<p>@Html.ActionLink("Add a tag", "AddTag", new { id = Model.RecipeId })</p>
-<p>@Html.ActionLink("Back to all recipes", "Index")</p>
-<p>@Html.ActionLink("Edit recipe", "Edit", new { id = Model.RecipeId })</p>
-<p>@Html.ActionLink("Delete recipe", "Delete", new { id = Model.RecipeId })</p>
+<tr>
+<td>@Html.ActionLink("Add a tag", "AddTag", new { id = Model.RecipeId })</td> |
+<td>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId })</td> |
+<td>@Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</td> |
+<td>@Html.ActionLink("Back to Recipes", "Index")</td>
+</tr>

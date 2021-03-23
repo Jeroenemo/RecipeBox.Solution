@@ -4,7 +4,7 @@
 
 @using RecipeBox.Models;
 
-<h1>Recipes</h1>
+<div class="header">Recipes</div>
 @using (Html.BeginForm())
 {
   @* <p>Search Recipes</p> *@
@@ -35,5 +35,5 @@
 
   <td>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</td> |
 
-  <td>@Html.ActionLink("Back", "Index")</td>
+  <td>@Html.ActionLink("Back", "Index", "Home")</td>
 </tr>
