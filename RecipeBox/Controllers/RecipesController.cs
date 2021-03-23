@@ -47,26 +47,23 @@ namespace RecipeBox.Controllers
 
     public async Task<ActionResult> Index(string userInput)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
       if (userInput == "Rating")
       {
-        var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var currentUser = await _userManager.FindByIdAsync(userId);
         var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).OrderByDescending(model => model.Rating).ToList();
+        ModelState.Clear();
         return View(userRecipes);
       }
       else
       {
         if (!(String.IsNullOrEmpty(userInput)))
         {
-          var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-          var currentUser = await _userManager.FindByIdAsync(userId);
           var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).Where(model => model.Name.Contains(userInput)).ToList();
           return View(userRecipes);
         }
         else
         {
-          var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-          var currentUser = await _userManager.FindByIdAsync(userId);
           var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
           return View(userRecipes);
         }

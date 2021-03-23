@@ -22,11 +22,11 @@
   <button type="submit" name="button" class="btn btn-default">Clear All Recipes</button>
 </form>
 
-<p>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</p>
-
 @using (Html.BeginForm())
 {
   <p>Search Recipes</p>
   @Html.TextBox("userInput")
-  <input type="submit" value="Search" class="btn btn-default"/>
+  <input type="submit" value="Search" class="btn btn-default" />
 }
+
+<p>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</p>
