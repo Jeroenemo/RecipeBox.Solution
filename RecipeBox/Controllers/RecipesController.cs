@@ -59,7 +59,7 @@ namespace RecipeBox.Controllers
       {
         if (!(String.IsNullOrEmpty(userInput)))
         {
-          var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).Where(model => model.Name.Contains(userInput)).ToList();
+          var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).Where(model => model.Ingredients.Contains(userInput) || model.Name.Contains(userInput)).ToList();
           return View(userRecipes);
         }
         else
