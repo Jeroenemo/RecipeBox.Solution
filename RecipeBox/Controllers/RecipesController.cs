@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace RecipeBox.Controllers
 {
@@ -31,6 +32,19 @@ namespace RecipeBox.Controllers
     //   return View(userRecipes);
     // }
 
+    // public async Task<IActionResult> Index(string userInput)
+    // {
+    //   var items = from model in _db.Items
+    //               select model;
+
+    //   // This if
+    //   if (!(String.IsNullOrEmpty(userInput)))
+    //   {
+    //     items = items.Where(model => model.Description.Contains(userInput));
+    //   }
+    //   return View(await items.ToListAsync());
+    // }
+
     public async Task<ActionResult> Index(string userInput)
     {
       if (userInput == "Rating")
@@ -42,10 +56,20 @@ namespace RecipeBox.Controllers
       }
       else
       {
-        var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var currentUser = await _userManager.FindByIdAsync(userId);
-        var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
-        return View(userRecipes);
+        if (!(String.IsNullOrEmpty(userInput)))
+        {
+          var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+          var currentUser = await _userManager.FindByIdAsync(userId);
+          var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).Where(model => model.Name.Contains(userInput)).ToList();
+          return View(userRecipes);
+        }
+        else
+        {
+          var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+          var currentUser = await _userManager.FindByIdAsync(userId);
+          var userRecipes = _db.Recipes.Where(entry => entry.User.Id == currentUser.Id).ToList();
+          return View(userRecipes);
+        }
       }
     }
 
