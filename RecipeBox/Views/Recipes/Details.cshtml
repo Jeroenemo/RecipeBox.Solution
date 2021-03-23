@@ -15,7 +15,13 @@
 <p>Instructions: @Html.DisplayFor(model => model.Instructions)</p>
 
 @* Here is where we could get fun and use a conditional to render boxing gloves instead of the word *@
-<p>Rating: @Html.DisplayFor(model => model.Rating)</p>
+<p>Rating: 
+@for (int i = 0; i < (int) Model.Rating+1; i++)
+{
+  <img src="~/img/glove.png" height="20px">
+  @* <span class="glove"></span> *@
+}
+</p>
 
 @if(@Model.JoinEntities.Count == 0)
 {
