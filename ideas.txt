@@ -1,4 +1,5 @@
-Add search bar to the top of Recipes page
+✓ Add search bar to the top of Recipes page
 When clicking rating, take user to a page that has all recipes with that rating
 
-Make it look fly af
+✓✓✓✓✓✓✓ Make it look fly af
+Navigation Panel

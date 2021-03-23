@@ -4,18 +4,18 @@
 
 @model RecipeBox.Models.Recipe
 
-<h2>Recipe: @Html.DisplayFor(model => model.Name)</h2>
+<div class="header">Recipe: @Html.DisplayFor(model => model.Name)</div>
 
 <hr>
 
-<h3>Recipe Description: @Html.DisplayFor(model => model.Description)</h3>
+<p>Recipe Description: @Html.DisplayFor(model => model.Description)</p>
 
-<h3>Ingredients: @Html.DisplayFor(model => model.Ingredients)</h3>
+<p>Ingredients: @Html.DisplayFor(model => model.Ingredients)</p>
 
-<h3>Instructions: @Html.DisplayFor(model => model.Instructions)</h3>
+<p>Instructions: @Html.DisplayFor(model => model.Instructions)</p>
 
 @* Here is where we could get fun and use a conditional to render boxing gloves instead of the word *@
-<h3>Rating: @Html.DisplayFor(model => model.Rating)</h3>
+<p>Rating: @Html.DisplayFor(model => model.Rating)</p>
 
 @if(@Model.JoinEntities.Count == 0)
 {

@@ -5,6 +5,13 @@
 @using RecipeBox.Models;
 
 <h1>Recipes</h1>
+@using (Html.BeginForm())
+{
+  @* <p>Search Recipes</p> *@
+  @Html.TextBox("userInput")
+  <input type="submit" value="Search" class="btn btn-default" />
+}
+<hr />
 
 @if (Model.Count == 0)
 {
@@ -14,15 +21,18 @@
   @foreach (Recipe recipe in Model)
   {
     <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId }) | @Html.ActionLink($"{recipe.Rating}", "Details", new { id = recipe.RecipeId })</li>
+    @for (int i = 0; i < (int) recipe.Rating +1; i++)
+    {
+      <img src="../img/glove.png" height="40px">
+      @* <span class="glove"></span> *@
+    }
   }
 </ul>
-<a href="/recipes/create">Add a new recipe.</a>
+<tr>
+  <td><a href="/recipes/create">Add a new recipe</a> </td> |
 
-@using (Html.BeginForm())
-{
-  <p>Search Recipes</p>
-  @Html.TextBox("userInput")
-  <input type="submit" value="Search" class="btn btn-default" />
-}
 
-<p>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</p>
+  <td>@Html.ActionLink("Sort By Rating", "Index", new {userInput = "Rating"})</td> |
+
+  <td>@Html.ActionLink("Back", "Index")</td>
+</tr>

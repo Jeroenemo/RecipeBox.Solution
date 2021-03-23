@@ -6,4 +6,47 @@ div#footer {
   color:#CCC;
   background:#333;
   padding:8px;
+  background-image: url("../img/recipebox_footer.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+body {
+  background-image: url("../img/recipebox.png");
+  background-repeat: no-repeat;
+  /* background-position: center; */
+}
+
+a:link {
+  color: maroon;
+}
+
+a:hover {
+  color: red;
+}
+td{
+  text-align: center;
+}
+
+.header {
+  font-family: 'Rock Salt', cursive;
+  font-size: 30px;
+}
+
+/* .subheader {
+
+} */
+
+.glove {
+  background-image: url("../img/glove.png");
+  height: 40px;
+}
+
+.center {
+  text-align: center;
+}
+
+.jumbotron {
+  margin: 0 0 5vh 40vw;
+  min-width: 450px;
 }
