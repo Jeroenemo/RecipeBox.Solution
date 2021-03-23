@@ -20,12 +20,13 @@
 <ul>
   @foreach (Recipe recipe in Model)
   {
-    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId }) | @Html.ActionLink($"{recipe.Rating}", "Details", new { id = recipe.RecipeId })</li>
+    <li>@Html.ActionLink($"{recipe.Name}", "Details", new { id = recipe.RecipeId }) | 
     @for (int i = 0; i < (int) recipe.Rating +1; i++)
     {
-      <img src="../img/glove.png" height="40px">
+      <img src="../img/glove.png" height="20px">
       @* <span class="glove"></span> *@
     }
+    </li>
   }
 </ul>
 <tr>
